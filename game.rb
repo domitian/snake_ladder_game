@@ -16,12 +16,18 @@ class Game
     end
 
     def start_game
-        roll_die_and_move_token
-        if player_won?
-            abort("Player won")
+        while(true) do
+            @game_board.print_board
+            puts "Press Enter to roll dice and move your token"
+            gets.chomp
+            roll_die_and_move_token
+            if player_won?
+                break
+            end
+            print_break
+            move_to_next_player
         end
-        @game_board.print_board
-        move_to_next_player
+        puts "Player won"
     end
 
     private
@@ -29,14 +35,14 @@ class Game
     def roll_die_and_move_token
         die_roll_result = @current_player.roll_die
         current_token_location = @current_player.get_token_location
-        p current_token_location
+        p "Players previous location is #{current_token_location}"
         final_location = die_roll_result + current_token_location
         final_location = @game_board.location_is_a_snake(final_location) || @game_board.location_is_a_ladder(final_location) || final_location
         unless @game_board.location_is_valid(final_location)
             final_location = current_token_location
         end
         @current_player.move_token_to_location final_location
-        puts "Your token has moved to this location #{final_location}"
+        puts "Player token has moved to this location #{final_location}"
     end
 
     def player_won?
@@ -49,8 +55,13 @@ class Game
         @current_player = @player_list[player_number]
     end
 
+    def print_break
+        puts "******************************************"
+        puts 
+        puts
+        puts
+    end
+
         
 end
 
-g = Game.new(10)
-g.start_game

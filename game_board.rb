@@ -16,9 +16,11 @@ class GameBoard
         dup_grid.shift
         @snakes.each do |k,v|
             dup_grid[k] = "\e[31mS\e[0m"
+            puts "Snake locations and their destinations are [#{k},#{v}]"
         end
         @ladders.each do |k,v|
             dup_grid[k] = "\e[32mL\e[0m"
+            puts "Ladder locations and their destinations are [#{k},#{v}]"
         end
         dup_grid.reverse.each_slice(gridsize).with_index do |row,index|
             if index.odd?
