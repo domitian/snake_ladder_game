@@ -1,4 +1,5 @@
 require 'pp'
+
 class GameBoard
 
     attr_reader :grid
@@ -62,13 +63,16 @@ class GameBoard
         @ladders = {}
         @snakes = {
             2 => 1,
+            55 => 20,
             24 => 12,
-            9  => 3
+            9  => 3,
+            90 => 45
         }
         @ladders = {
             3 => 4,
             4 => 100,
             10 => 49,
+            22 => 66,
             30 => 99
         }
     end

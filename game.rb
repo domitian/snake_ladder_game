@@ -1,6 +1,10 @@
 require_relative 'player'
 require_relative 'game_board'
+require_relative 'token'
+require_relative 'die'
 class Game
+
+    include Die
 
     attr_accessor :player_list
     attr_accessor :current_player
@@ -12,6 +16,7 @@ class Game
         num_players.times do 
             @player_list << Player.new
         end
+        puts "#{num_players} are playing the game, Starting with player 1"
         @current_player = @player_list.first
     end
 
@@ -19,7 +24,7 @@ class Game
         while(true) do
             @game_board.print_board
             puts "Press Enter to roll dice and move your token"
-            gets.chomp
+            STDIN.gets.chomp
             roll_die_and_move_token
             if player_won?
                 break
@@ -56,10 +61,8 @@ class Game
     end
 
     def print_break
-        puts "******************************************"
         puts 
-        puts
-        puts
+        puts "******************************************"
     end
 
         
